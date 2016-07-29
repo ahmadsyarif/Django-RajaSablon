@@ -5,13 +5,13 @@ from django.db import models
 Defenition of class product
 """
 class product(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=200)
     price = models.IntegerField()
     description = models.TextField()
     discount = models.FloatField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_last_modified = models.DateTimeField(auto_now=True)
-    created_by = models.CharField()
+    created_by = models.CharField(max_length=200)
     #TODO to create image field and its callable function to upload image in external repository
     #image = models.ImageField()
     available = models.IntegerField(default=0)
@@ -25,11 +25,11 @@ class product(models.Model):
 Defenition of class Category
 """
 class category(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=200)
     description = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_last_modified = models.DateTimeField(auto_now=True)
-    created_by = models.CharField()
+    created_by = models.CharField(max_length=200)
 
     #many to many relationship with product
     products = models.ManyToManyField(product)
