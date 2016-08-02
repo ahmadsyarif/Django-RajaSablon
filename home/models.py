@@ -1,5 +1,7 @@
 from django.db import models
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 # Create your models here.
 """
 Defenition of class product
@@ -13,7 +15,7 @@ class product(models.Model):
     date_last_modified = models.DateTimeField(auto_now=True)
     created_by = models.CharField(max_length=200)
     #TODO to create image field and its callable function to upload image in external repository
-    #image = models.ImageField()
+    image = models.URLField(default='empty')
     available = models.IntegerField(default=0)
 
     #manager
@@ -21,6 +23,10 @@ class product(models.Model):
 
     def __str__(self):
         return '{}'.format(self.name)
+
+    def upload_picture(self,file):
+        response = cloudinary.uploader.upload(file)
+        self.image = response['secure_url']
 """
 Defenition of class Category
 """
