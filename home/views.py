@@ -4,3 +4,9 @@ from django.http import HttpResponse
 
 def index(request):
     return HttpResponse("hello world, rita I love you")
+
+def upload(request):
+    context = {
+        'page':"upload"
+    }
+    return render(request,'home/main.html',context)
