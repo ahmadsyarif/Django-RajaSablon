@@ -11,9 +11,16 @@ def index(request):
     return render(request,'home/main.html',context)
 
 def upload(request):
-    form = productForm()
-    context = {
-        'page':"upload",
-        'form':form
-    }
+    if request.method =="POST":
+        form = productForm(request.POST)
+        if form.is_valid():
+            return HttpResponse("success")
+        else:
+            return HttpResponse("failed")
+    else:
+        form = productForm()
+        context = {
+            'page':"upload",
+            'form':form
+        }
     return render(request,'home/main.html',context)
