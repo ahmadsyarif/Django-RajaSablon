@@ -5,7 +5,10 @@ from .form import *
 # Create your views here.
 
 def index(request):
-    return HttpResponse("hello world, rita I love you")
+    context ={
+        'page':"home"
+    }
+    return render(request,'home/main.html',context)
 
 def upload(request):
     form = productForm()
