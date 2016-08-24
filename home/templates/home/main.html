@@ -10,9 +10,9 @@
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
     <meta name="description" content="Upload Page">
     <meta name="author" content="asyarif">
-    {% if page == "upload" %}
-        <title>Upload</title>
-    {% endif %}    
+    
+    <title>{{ page }}</title>
+        
     <!-- Bootstrap Core CSS -->
     <link href="{% static 'home/css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -64,6 +64,8 @@
 
     {% if page == "upload" %}
         {% include "home/upload.html" %}
+    {% elif page == "details" %}
+        {% include "home/details.html" %}
     {% elif page == "main" %}
         <h1>Hello World</h1> 
     {% endif %}
