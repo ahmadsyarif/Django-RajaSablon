@@ -1,4 +1,4 @@
-{% load staticfiles %}
+
 
 <!-- Page Content -->
 <div class="container">
@@ -7,7 +7,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <form action="/upload" method="POST" class="product-form"> {% csrf_token %}
+            <form action="/upload" method="POST" class="product-form" enctype="multipart/form-data"> {% csrf_token %}
             {{ form.as_p}}
             <input type="submit" name="" value="submit">
             </form>

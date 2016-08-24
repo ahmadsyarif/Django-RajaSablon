@@ -12,11 +12,21 @@ def index(request):
 
 def upload(request):
     if request.method =="POST":
-        form = productForm(request.POST)
+        form = productForm(request.POST,request.FILES)
         if form.is_valid():
-            return HttpResponse("success")
+            prod = form.save(commit=False)
+            prod.name = "test"
+            prod.price = 222
+            prod.description = "test lagi"
+            prod.discount = 20
+            prod.upload_picture(request.FILES["imageFile"])
+            prod.save()
+            context = {
+                'page':"details",
+                'product':prod
+            }
         else:
-            return HttpResponse("failed")
+            return HttpResponse("{} {}".format(form.errors,form.non_field_errors ))
     else:
         form = productForm()
         context = {
