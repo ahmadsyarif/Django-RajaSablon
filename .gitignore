@@ -91,4 +91,3 @@ ENV/
 .vscode/
 db.sqlite3
 *.sqlite3
-./home/migrations
