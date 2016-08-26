@@ -28,10 +28,17 @@ class product(models.Model):
     def upload_picture(self,file):
         response = cloudinary.uploader.upload(file)
         self.imageUrl = response['secure_url']
-        self.remove_cache_image()
-
+        
     def remove_cache_image(self):
-        os.remove(self.imageFile.name)
+        os.remove(self.imageFile.path)
+    
+    def save(self):
+        super(product,self).save()
+        try:
+            self.remove_cache_image()
+        except FileNotFoundError:
+            pass
+        
 """
 Defenition of class Category
 """
