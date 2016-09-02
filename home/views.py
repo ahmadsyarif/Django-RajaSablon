@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import *
-from .form import *
+from .models import category,product
+from .form import productForm,categoryForm
 # Create your views here.
 
 def index(request):
@@ -10,27 +10,53 @@ def index(request):
     }
     return render(request,'home/main.html',context)
 
-def upload(request):
+def add_product(request):
     if request.method =="POST":
         form = productForm(request.POST,request.FILES)
         if form.is_valid():
             prod = form.save(commit=False)
-            prod.name = "test"
-            prod.price = 222
-            prod.description = "test lagi"
-            prod.discount = 20
-            prod.upload_picture(request.FILES["imageFile"])
             prod.save()
             context = {
                 'page':"details",
+                'type':"product",
                 'product':prod
             }
         else:
-            return HttpResponse("{} {}".format(form.errors,form.non_field_errors ))
+            context = {
+                'page':"error"
+            }
     else:
         form = productForm()
         context = {
             'page':"upload",
+            'type':"product",
             'form':form
         }
     return render(request,'home/main.html',context)
+
+def add_category(request):
+    if request.method =="POST":
+        form = categoryForm(request.POST)
+        if form.is_valid():
+            cate = form.save(commit=False)
+            cate.save()
+            context = {
+                'page':"details",
+                'type':"category",
+                'category':cate
+            }
+        else:
+            context = {
+                'page':"error"
+            }
+        return render(request,'home/main.html',context)
+    else:
+        form = categoryForm()
+        context = {
+            'page':"upload",
+            'type':"category",
+            'form':form
+        }
+        return render(request,'home/main.html',context)
+    
+    

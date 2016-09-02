@@ -4,8 +4,17 @@
 <div class="container">
     <!-- Jumbotron Header -->
     <div class="row">
-        <h2>{{ product.name }}</h2>    
-        <img src="{{ product.imageUrl }}" alt="">
+        {% if type == "product" %}
+            <h3>{{ product.name }}</h3>
+            <h3>Rp. {{ product.price }}</h3>
+            <h3>{{ product.description }}</h3>
+            <h3>{{ product.discount }} %</h3>
+            <h3>{{ product.available }}</h3>
+            <img src="{{ product.image_url }}" alt="" width="200px" height="200px">
+        {% elif type == "category" %}
+            <h3>{{ category.name }}</h3>
+            <h3>{{ category.description }}</h3>
+        {% endif%}
     </div>
     
     
