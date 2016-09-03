@@ -1,12 +1,18 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from .models import category,product
 from .form import productForm,categoryForm
 # Create your views here.
 
 def index(request):
+    products = None
+    try:
+        products = product.products.all()
+    except:
+        raise Http404
     context ={
-        'page':"home"
+        'page':"index",
+        'products':products
     }
     return render(request,'home/main.html',context)
 

@@ -56,6 +56,7 @@ class product(models.Model):
         try:
             self.upload_picture(self.image_file.path)
             self.remove_cache_image()
+            super(product,self).save()
         except FileNotFoundError:
             pass
 
