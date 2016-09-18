@@ -93,3 +93,8 @@ db.sqlite3
 *.sqlite3
 home/migrations
 media/
+tcl/
+Lib/
+Include/
+Scripts/
+pip-selfcheck.json
